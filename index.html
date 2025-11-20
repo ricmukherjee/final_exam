@@ -12,7 +12,7 @@
             width: 90%;
             margin: 20px 0;
         }
-        /* Disable right-click */
+        /* Disable right-click + Selection */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -21,26 +21,34 @@
     </style>
 
     <script>
-        // Set expiration time here (IST)
+        // Expire on Nov 22, 2025 at 5:00 PM IST
         const expireTime = new Date("2025-11-22T17:00:00+05:30").getTime();
 
-        setInterval(() => {
+        function checkExpire() {
             const now = Date.now();
             if (now > expireTime) {
-                document.body.innerHTML = "<h2>Link expired</h2>";
+                document.getElementById("content").style.display = "none";
+                document.getElementById("expired").style.display = "block";
             }
-        }, 2000);
+        }
+
+        // Check every 2 seconds
+        setInterval(checkExpire, 2000);
     </script>
 </head>
-<body oncontextmenu="return false"> <!-- disables right-click -->
 
-    <h2>Exam Paper</h2>
+<body oncontextmenu="return false">
 
-    <!-- List your pages here -->
-    <img src="final_1.jpg">
-    <img src="final_2.jpg">
-    <!-- Add more if needed -->
+    <!-- Hidden expired message -->
+    <h2 id="expired" style="display:none;">Link expired</h2>
+
+    <!-- Main content -->
+    <div id="content">
+        <h2>Exam Paper</h2>
+
+        <img src="final_1.jpg">
+        <img src="final_2.jpg">
+    </div>
 
 </body>
 </html>
-
